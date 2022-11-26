@@ -1,4 +1,4 @@
-using GEIN.API.DA.Models;
+using GEIN.API.DAL.EF; 
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

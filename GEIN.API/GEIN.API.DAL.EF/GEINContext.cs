@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GEIN.API.DO.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GEIN.API.DA.Models
+namespace GEIN.API.DAL.EF
 {
     public class GEINContext : DbContext
     {

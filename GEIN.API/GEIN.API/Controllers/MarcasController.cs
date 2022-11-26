@@ -1,7 +1,9 @@
-﻿using GEIN.API.BL.Class;
-using GEIN.API.BL.Interfaces;
-using GEIN.API.DA.Models;
+﻿using GEIN.API.DAL.EF;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
+using BL = GEIN.API.BL;
+using data = GEIN.API.DO.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,47 +13,48 @@ namespace GEIN.API.Controllers
     [ApiController]
     public class MarcasController : ControllerBase
     {
-        IMarca marcasBL;
-
+        private readonly GEINContext _geinContext;
         public MarcasController(GEINContext geinContext)
         {
-            this.marcasBL = new MarcaBL(geinContext);
+            this._geinContext = geinContext;
         }
-
-
-        // GET: api/<MarcasController>
+         
         [HttpGet]
-        public IEnumerable<Marca> GetAll()
+        public IEnumerable<data.Marca> GetMarcas()
         {
-            return marcasBL.GetAll();
+            return new BL.Marca(_geinContext).GetAll();
         }
 
-        // GET api/<MarcasController>/5
+
         [HttpGet("{id}")]
-        public Marca GetOneById(int id)
+        public data.Marca GetMarca(int id)
         {
-            return marcasBL.GetOneById(id);
+            return new BL.Marca(_geinContext).GetOneById(id); ;
         }
 
-        // POST api/<MarcasController>
-        [HttpPost]
-        public bool Add(Marca marca)
-        {
-            return marcasBL.Add(marca);
-        }
 
-        // PUT api/<MarcasController>/5
         [HttpPut("{id}")]
-        public bool Update(Marca marca)
+        public bool PutMarca(data.Marca model)
         {
-            return marcasBL.Update(marca);
+            new BL.Marca(_geinContext).Update(model);
+            return true;
+
         }
 
-        // DELETE api/<MarcasController>/5
-        [HttpDelete("{id}")]
-        public bool Delete(int id)
+
+        [HttpPost]
+        public bool PostMarca(data.Marca model)
         {
-            return marcasBL.Delete(id);
+            new BL.Marca(_geinContext).Insert(model);
+            return true;
         }
+
+        // DELETE: api/Tiendas/5
+        [HttpDelete("{id}")]
+        public  data.Marca DeleteMarca(int id)
+        {
+            return new BL.Marca(_geinContext).GetOneById(id);  
+        }
+         
     }
 }

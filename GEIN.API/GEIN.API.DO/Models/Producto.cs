@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GEIN.API.DA.Models
+namespace GEIN.API.DO.Models
 {
     public class Producto
     {

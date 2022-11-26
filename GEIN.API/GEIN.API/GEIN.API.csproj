@@ -19,7 +19,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GEIN.API.BL\GEIN.API.BL.csproj" />
-    <ProjectReference Include="..\GEIN.API.DA\GEIN.API.DA.csproj" />
   </ItemGroup>
 
 </Project>
