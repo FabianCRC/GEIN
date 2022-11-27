@@ -15,7 +15,9 @@ namespace GEIN.API.DO.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdProducto { get; set; }
         public string Descripcion { get; set; }
-        [ForeignKey("IdMarca")] 
+        public int IdMarca { get; set; }
+        public int IdCategoria { get; set; }
+        [ForeignKey("IdMarca")]
         public virtual Marca Marca { get; set; }
         [ForeignKey("IdCategoria")]
         public virtual Categoria Categoria { get; set; }
