@@ -1,16 +1,16 @@
-﻿@model IEnumerable<GEIN.Models.Marca>
+﻿@model IEnumerable<GEIN.Models.Categoria>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Listado de Marcas</h1>
+<h1>Listado de Categorías</h1>
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.IdMarca)
+                @Html.DisplayNameFor(model => model.IdCategoria)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Descripcion)
@@ -25,22 +25,20 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdMarca)
+                    @Html.DisplayFor(modelItem => item.IdCategoria)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Descripcion)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new {  id=item.IdMarca  }) |
-                    @Html.ActionLink("Detalles", "Details", new { id=item.IdMarca  }) |
-                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.IdMarca  })
+                    @Html.ActionLink("Editar", "Edit", new {  id=item.IdCategoria  }) |
+                    @Html.ActionLink("Detalles", "Details", new { id=item.IdCategoria  }) |
+                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.IdCategoria  })
                 </td>
             </tr>
         }
     </tbody>
 </table>
-
 <a class="btn btn-primary" asp-action="Create">
     Crear nuevo
 </a>
-
