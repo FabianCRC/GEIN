@@ -1,0 +1,56 @@
+﻿@model IEnumerable<GEIN.Models.Producto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Listado de Productos</h1>
+
+<table class="table  table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProducto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMarca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCategoria)
+            </th>
+            <th>
+                @Html.Label("Acciones")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdProducto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdMarca)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCategoria)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new {  id=item.IdProducto  }) |
+                    @Html.ActionLink("Detalles", "Details", new { id=item.IdProducto  }) |
+                    @Html.ActionLink("Eliminar", "Delete", new {  id=item.IdProducto  })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">
+    Crear nuevo
+</a>

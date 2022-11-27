@@ -7,16 +7,17 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace GEIN.Controllers
+namespace GEIN.Controllers.Catalogos
 {
     public class MarcasController : Controller
     {
         private string urlBase = "https://localhost:7068/";
+        private string controller = "api/Marcas/";
         private IClientAPI<Marca> api;
 
         public MarcasController()
         {
-            api = new ClientAPI<Marca>(urlBase, "api/Marcas/"); ;
+            api = new ClientAPI<Marca>(urlBase, controller);
         }
 
         // GET: Marcas 

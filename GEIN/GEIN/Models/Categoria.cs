@@ -3,13 +3,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace GEIN.Models
 {
-    public class Marca
+    public class Categoria
     {
-        [DisplayName("Código de Marca")]
+        [DisplayName("Código de Categoría")]
         [AllowNull]
-        public int IdMarca { get; set; }
-        [DisplayName("Descripción")]
+        public int IdCategoria { get; set; }
         public string Descripcion { get; set; }
-
     }
 }
