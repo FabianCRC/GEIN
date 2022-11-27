@@ -15,7 +15,6 @@ namespace GEIN.Models
         public int IdMarca { get; set; }
         [DisplayName("Categoría")]
         public int IdCategoria { get; set; }
-          
-
+           
     }
 }
