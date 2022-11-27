@@ -17,11 +17,11 @@ builder.Services.AddDbContext<GEINContext>(options =>
 var app = builder.Build();
 
 //Comentar using una vez creado base de datos al ejecutarse por primera vez
-using (var scope = app.Services.CreateScope())
-{
-    var context = scope.ServiceProvider.GetRequiredService<GEINContext>();
-    context.Database.Migrate();
-}
+//using (var scope = app.Services.CreateScope())
+//{
+//    var context = scope.ServiceProvider.GetRequiredService<GEINContext>();
+//    context.Database.Migrate();
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
