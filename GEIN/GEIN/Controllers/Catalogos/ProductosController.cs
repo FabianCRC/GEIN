@@ -83,19 +83,17 @@ namespace GEIN.Controllers.Catalogos
             return View(model);
         }
 
+        private void CargarCombosProductos()
+        {
+            ViewBag.listaCategorias = new SelectList(new ClientAPI<Categoria>(urlBase, "api/Categorias").getAllMethod().Result, "IdCategoria", "Descripcion");
+            ViewBag.listaMarcas = new SelectList(new ClientAPI<Marca>(urlBase, "api/Marcas").getAllMethod().Result, "IdMarca", "Descripcion");
+        }
+
         // GET: MarcasController/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             await api.deleteMethod(id);//el metodo devuelve booleano del resultado de la operacion
             return RedirectToAction(nameof(Index));
-        }
-
-        private async void CargarCombosProductos()
-        {
-            SelectList listaCategorias = new SelectList(await new ClientAPI<Categoria>(urlBase, "api/Categorias").getAllMethod(), "IdCategoria", "Descripcion");
-            SelectList listaMarcas = new SelectList(await new ClientAPI<Marca>(urlBase, "api/Marcas").getAllMethod(), "IdMarca", "Descripcion");
-            TempData["listaCategorias"] = listaCategorias;
-            TempData["listaMarcas"] = listaMarcas;
         }
     }
 }

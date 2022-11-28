@@ -17,12 +17,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="IdMarca" class="control-label"></label>
-                @Html.DropDownListFor(m=>m.IdMarca,(SelectList)@TempData["listaMarcas"],new{@class="form-control"} )
+                @Html.DropDownListFor(m=>m.IdMarca, (SelectList)ViewBag.listaMarcas,new{@class="form-control"} )
                 <span asp-validation-for="IdMarca" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdCategoria" class="control-label"></label>
-                @Html.DropDownListFor(m=>m.IdCategoria,(SelectList)@TempData["listaCategorias"],new{@class="form-control"})
+                @Html.DropDownListFor(m=>m.IdCategoria, (SelectList)ViewBag.listaCategorias,new{@class="form-control"})
                 <span asp-validation-for="IdCategoria" class="text-danger"></span>
             </div>
             <div class="form-group mt-3">

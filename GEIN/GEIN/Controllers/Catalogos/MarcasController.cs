@@ -47,7 +47,7 @@ namespace GEIN.Controllers.Catalogos
         {
             if (ModelState.IsValid)
             {
-                if (await api.addMethod(model))
+                if (await api.addMethod( model))
                 {
                     return RedirectToAction(nameof(Index));
                 }

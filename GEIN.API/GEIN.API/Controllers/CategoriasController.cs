@@ -1,8 +1,10 @@
-﻿using GEIN.API.DAL.EF;
+﻿using AutoMapper;
+using GEIN.API.DAL.EF;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using BL = GEIN.API.BL;
 using data = GEIN.API.DO.Models;
+using datamodel = GEIN.API.DataModels;
 
 namespace GEIN.API.Controllers
 {
@@ -11,55 +13,62 @@ namespace GEIN.API.Controllers
     public class CategoriasController : Controller
     {
         private readonly GEINContext _geinContext;
-        public CategoriasController(GEINContext geinContext)
+        private readonly IMapper _mapper;
+        public CategoriasController(GEINContext geinContext, IMapper mapper)
         {
             this._geinContext = geinContext;
+            this._mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<data.Categoria>>> GetCategorias()
+        public async Task<ActionResult<IEnumerable<datamodel.Categoria>>> GetCategorias()
         {
-            return new BL.Categoria(_geinContext).GetAll().ToList();
+            var aux = new BL.Categoria(_geinContext).GetAll().ToList();
+            return _mapper.Map<IEnumerable<data.Categoria>, IEnumerable<datamodel.Categoria>>(aux).ToList();
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<data.Categoria>> GetCategoria(int id)
+        public async Task<ActionResult<datamodel.Categoria>> GetCategoria(int id)
         {
-            return new BL.Categoria(_geinContext).GetOneById(id);
+            var aux = new BL.Categoria(_geinContext).GetOneById(id);
+            return _mapper.Map<data.Categoria, datamodel.Categoria>(aux);
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategoria(int id, data.Categoria model)
+        public async Task<IActionResult> PutCategoria(int id, datamodel.Categoria model)
         {
             if (id != model.IdCategoria)
             {
                 return BadRequest();
             }
-            new BL.Categoria(_geinContext).Update(model);
+            var mapaux = _mapper.Map<datamodel.Categoria, data.Categoria>(model);
+            new BL.Categoria(_geinContext).Update(mapaux);
             return NoContent();
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<data.Categoria>> PostCategoria(int id, data.Categoria model)
+        public async Task<IActionResult> PostCategoria(datamodel.Categoria model)
         {
-            new BL.Categoria(_geinContext).Insert(model);
+            var mapaux = _mapper.Map<datamodel.Categoria, data.Categoria>(model);
+            new BL.Categoria(_geinContext).Insert(mapaux);
             return NoContent();
         }
 
         // DELETE: api/Tiendas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<data.Categoria>> DeleteCategoria(int id)
+        public async Task<ActionResult<datamodel.Categoria>> DeleteCategoria(int id)
         {
-            var Categoria = new BL.Categoria(_geinContext).GetOneById(id);
-            if (Categoria == null)
+            var categoria = new BL.Categoria(_geinContext).GetOneById(id);
+            if (categoria == null)
             {
                 return NotFound();
             }
-            new BL.Categoria(_geinContext).Delete(Categoria);
-            return Categoria;
+            new BL.Categoria(_geinContext).Delete(categoria);
+            var aux = _mapper.Map<data.Categoria, datamodel.Categoria>(categoria);
+            return aux;
         }
     }
 }

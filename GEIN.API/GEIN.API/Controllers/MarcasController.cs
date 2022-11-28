@@ -1,10 +1,12 @@
-﻿using GEIN.API.DAL.EF;
+﻿using AutoMapper;
+using GEIN.API.DAL.EF;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using BL = GEIN.API.BL;
 using data = GEIN.API.DO.Models;
+using datamodel = GEIN.API.DataModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -15,47 +17,53 @@ namespace GEIN.API.Controllers
     public class MarcasController : ControllerBase
     {
         private readonly GEINContext _geinContext;
-        public MarcasController(GEINContext geinContext)
+        private readonly IMapper _mapper;
+        public MarcasController(GEINContext geinContext, IMapper mapper)
         {
             this._geinContext = geinContext;
+            this._mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<data.Marca>>> GetMarcas()
+        public async Task<ActionResult<IEnumerable<datamodel.Marca>>> GetMarcas()
         {
-            return new BL.Marca(_geinContext).GetAll().ToList();
+            var aux = new BL.Marca(_geinContext).GetAll().ToList();
+            return _mapper.Map<IEnumerable<data.Marca>, IEnumerable<datamodel.Marca>>(aux).ToList();
         }
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<data.Marca>> GetMarca(int id)
+        public async Task<ActionResult<datamodel.Marca>> GetMarca(int id)
         {
-            return new BL.Marca(_geinContext).GetOneById(id);
+            var aux = new BL.Marca(_geinContext).GetOneById(id);
+            return _mapper.Map<data.Marca, datamodel.Marca>(aux);
         }
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMarca(int id, data.Marca model)
+        public async Task<IActionResult> PutMarca(int id, datamodel.Marca model)
         {
             if (id != model.IdMarca)
             {
                 return BadRequest();
             }
-            new BL.Marca(_geinContext).Update(model);
+            var mapaux = _mapper.Map<datamodel.Marca, data.Marca>(model);
+            new BL.Marca(_geinContext).Update(mapaux);
             return NoContent();
         }
 
 
         [HttpPost]
-        public async Task<ActionResult<data.Marca>> PostMarca(int id, data.Marca model)
+        public async Task<IActionResult> PostMarca(datamodel.Marca model)
         {
-            new BL.Marca(_geinContext).Insert(model);
+            var mapaux = _mapper.Map<datamodel.Marca, data.Marca>(model);
+            new BL.Marca(_geinContext).Insert(mapaux);
             return NoContent();
         }
 
-        // DELETE: api/Tiendas/5
+        // DELETE: api/Marcas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<data.Marca>> DeleteMarca(int id)
+        public async Task<ActionResult<datamodel.Marca>> DeleteMarca(int id)
         {
             var marca = new BL.Marca(_geinContext).GetOneById(id);
             if (marca == null)
@@ -63,7 +71,8 @@ namespace GEIN.API.Controllers
                 return NotFound();
             }
             new BL.Marca(_geinContext).Delete(marca);
-            return marca;
+            var aux = _mapper.Map<data.Marca, datamodel.Marca>(marca);
+            return aux;
         }
 
     }
