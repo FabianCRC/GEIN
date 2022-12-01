@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using data = GEIN.API.DO.Models;
+using dal = GEIN.API.DAL.Catalogos;
+using data = GEIN.API.DO.Models.Catalogos;
 
-namespace GEIN.API.BL
+namespace GEIN.API.BL.Catalogos
 {
     public class Categoria : ICRUD<data.Categoria>
     {
@@ -20,26 +20,26 @@ namespace GEIN.API.BL
         }
         public IEnumerable<data.Categoria> GetAll()
         {
-            return new DAL.Categoria(_geinContext).GetAll();
+            return new dal.Categoria(_geinContext).GetAll();
         }
 
         public data.Categoria GetOneById(int id)
         {
-            return new DAL.Categoria(_geinContext).GetOneById(id);
+            return new dal.Categoria(_geinContext).GetOneById(id);
         }
 
         public void Insert(data.Categoria t)
         {
-            new DAL.Categoria(_geinContext).Insert(t);
+            new dal.Categoria(_geinContext).Insert(t);
         }
 
         public void Update(data.Categoria t)
         {
-            new DAL.Categoria(_geinContext).Update(t);
+            new dal.Categoria(_geinContext).Update(t);
         }
         public void Delete(data.Categoria t)
         {
-            new DAL.Categoria(_geinContext).Delete(t);
+            new dal.Categoria(_geinContext).Delete(t);
         }
     }
 }

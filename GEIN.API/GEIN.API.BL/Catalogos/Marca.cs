@@ -1,51 +1,47 @@
 ﻿using GEIN.API.DAL.EF;
-using GEIN.API.DAL.Repository;
 using GEIN.API.DO.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using data = GEIN.API.DO.Models;
+using dal = GEIN.API.DAL.Catalogos;
+using data = GEIN.API.DO.Models.Catalogos;
 
-namespace GEIN.API.DAL
+
+
+namespace GEIN.API.BL.Catalogos
 {
     public class Marca : ICRUD<data.Marca>
     {
-        private Repository<data.Marca> _repo;
+        private GEINContext _geinContext;
 
         public Marca(GEINContext geinContext)
         {
-            _repo = new Repository<data.Marca>(geinContext);
+            _geinContext = geinContext;
         }
-
         public IEnumerable<data.Marca> GetAll()
         {
-            return _repo.GetAll();
+            return new dal.Marca(_geinContext).GetAll();
         }
 
         public data.Marca GetOneById(int id)
         {
-            return _repo.GetOneById(id);
+            return new dal.Marca(_geinContext).GetOneById(id);
         }
 
         public void Insert(data.Marca t)
         {
-            _repo.Insert(t);
-            _repo.Commit();
+            new dal.Marca(_geinContext).Insert(t);
         }
 
         public void Update(data.Marca t)
         {
-            _repo.Update(t);
-            _repo.Commit();
+            new dal.Marca(_geinContext).Update(t);
         }
-
         public void Delete(data.Marca t)
         {
-            _repo.Delete(t);
-            _repo.Commit();
+            new dal.Marca(_geinContext).Delete(t);
         }
-
     }
 }

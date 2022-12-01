@@ -9,40 +9,40 @@ using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using data = GEIN.API.DO.Models;
 
-namespace GEIN.API.DAL
+namespace GEIN.API.DAL.Catalogos
 {
-    public class Categoria : ICRUD<data.Categoria>
+    public class Categoria : ICRUD<data.Catalogos.Categoria>
     {
-        private Repository<data.Categoria> _repo;
+        private Repository<data.Catalogos.Categoria> _repo;
 
         public Categoria(GEINContext geinContext)
         {
-            _repo = new Repository<data.Categoria>(geinContext);
+            _repo = new Repository<data.Catalogos.Categoria>(geinContext);
         }
 
-        public IEnumerable<data.Categoria> GetAll()
+        public IEnumerable<data.Catalogos.Categoria> GetAll()
         {
             return _repo.GetAll();
         }
 
-        public data.Categoria GetOneById(int id)
+        public data.Catalogos.Categoria GetOneById(int id)
         {
             return _repo.GetOneById(id);
         }
 
-        public void Insert(data.Categoria t)
+        public void Insert(data.Catalogos.Categoria t)
         {
             _repo.Insert(t);
             _repo.Commit();
         }
 
-        public void Update(data.Categoria t)
+        public void Update(data.Catalogos.Categoria t)
         {
             _repo.Update(t);
             _repo.Commit();
         }
 
-        public void Delete(data.Categoria t)
+        public void Delete(data.Catalogos.Categoria t)
         {
             _repo.Delete(t);
             _repo.Commit();

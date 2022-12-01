@@ -11,4 +11,8 @@
     <ProjectReference Include="..\GEIN.API.DO\GEIN.API.DO.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Seguridad\" />
+  </ItemGroup>
+
 </Project>

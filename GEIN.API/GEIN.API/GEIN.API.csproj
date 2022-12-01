@@ -23,4 +23,8 @@
     <ProjectReference Include="..\GEIN.API.BL\GEIN.API.BL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataModels\Seguridad\" />
+  </ItemGroup>
+
 </Project>

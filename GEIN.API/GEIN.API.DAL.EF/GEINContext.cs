@@ -1,4 +1,5 @@
-﻿using GEIN.API.DO.Models;
+﻿using GEIN.API.DO.Models.Catalogos;
+using GEIN.API.DO.Models.Seguridad;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,13 @@ namespace GEIN.API.DAL.EF
         {
 
         }
+        //Estructura de Seguridad
+        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Perfil> Perfiles { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<MenuXPerfil> MenuXPerfiles { get; set; }
+        public DbSet<PerfilXUsuario> PerfilXUsuarios { get; set; }
+        //Estructura de tablas
         public DbSet<Producto> Productos { get; set; }
         public DbSet<Marca> Marcas { get; set; }
         public DbSet<Categoria> Categorias { get; set; }

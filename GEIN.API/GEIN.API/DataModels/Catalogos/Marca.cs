@@ -1,4 +1,4 @@
-﻿namespace GEIN.API.DataModels
+﻿namespace GEIN.API.DataModels.Catalogos
 {
     public class Marca
     {

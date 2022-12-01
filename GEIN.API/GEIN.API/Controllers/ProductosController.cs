@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
 using GEIN.API.DAL.EF;
+using GEIN.API.DataModels.Catalogos;
+using GEIN.API.DO.Models.Catalogos;
 using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using BL = GEIN.API.BL;
-using data = GEIN.API.DO.Models;
-using datamodel = GEIN.API.DataModels;
+using bl = GEIN.API.BL.Catalogos;
+using data = GEIN.API.DO.Models.Catalogos;
+using datamodel = GEIN.API.DataModels.Catalogos;
 
 namespace GEIN.API.Controllers
 {
@@ -24,7 +25,7 @@ namespace GEIN.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodel.Producto>>> GetProductos()
         {
-            var aux = new BL.Producto(_geinContext).GetAll().ToList();
+            var aux = new bl.Producto(_geinContext).GetAll().ToList();
             return _mapper.Map<IEnumerable<data.Producto>, IEnumerable<datamodel.Producto>>(aux).ToList();
         }
 
@@ -32,7 +33,7 @@ namespace GEIN.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<datamodel.Producto>> GetProducto(int id)
         {
-            var aux = new BL.Producto(_geinContext).GetOneById(id);
+            var aux = new bl.Producto(_geinContext).GetOneById(id);
             return _mapper.Map<data.Producto, datamodel.Producto>(aux);
         }
 
@@ -45,7 +46,7 @@ namespace GEIN.API.Controllers
                 return BadRequest();
             }
             var mapaux = _mapper.Map<datamodel.Producto, data.Producto>(model);
-            new BL.Producto(_geinContext).Update(mapaux);
+            new bl.Producto(_geinContext).Update(mapaux);
             return NoContent();
         }
 
@@ -54,7 +55,7 @@ namespace GEIN.API.Controllers
         public async Task<IActionResult> PostProducto(datamodel.Producto model)
         {
             var mapaux = _mapper.Map<datamodel.Producto, data.Producto>(model);
-            new BL.Producto(_geinContext).Insert(mapaux);
+            new bl.Producto(_geinContext).Insert(mapaux);
             return NoContent();
         }
 
@@ -62,12 +63,12 @@ namespace GEIN.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<datamodel.Producto>> DeleteProducto(int id)
         {
-            var producto = new BL.Producto(_geinContext).GetOneById(id);
+            var producto = new bl.Producto(_geinContext).GetOneById(id);
             if (producto == null)
             {
                 return NotFound();
             }
-            new BL.Producto(_geinContext).Delete(producto);
+            new bl.Producto(_geinContext).Delete(producto);
             var aux = _mapper.Map<data.Producto, datamodel.Producto>(producto);
             return aux;
         }

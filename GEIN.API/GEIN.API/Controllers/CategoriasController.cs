@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using GEIN.API.DAL.EF;
+using GEIN.API.DataModels.Catalogos;
+using GEIN.API.DO.Models.Catalogos;
 using Microsoft.AspNetCore.Mvc;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using BL = GEIN.API.BL;
-using data = GEIN.API.DO.Models;
-using datamodel = GEIN.API.DataModels;
+using bl = GEIN.API.BL.Catalogos;
+using data = GEIN.API.DO.Models.Catalogos;
+using datamodel = GEIN.API.DataModels.Catalogos;
 
 namespace GEIN.API.Controllers
 {
@@ -23,7 +25,7 @@ namespace GEIN.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<datamodel.Categoria>>> GetCategorias()
         {
-            var aux = new BL.Categoria(_geinContext).GetAll().ToList();
+            var aux = new bl.Categoria(_geinContext).GetAll().ToList();
             return _mapper.Map<IEnumerable<data.Categoria>, IEnumerable<datamodel.Categoria>>(aux).ToList();
         }
 
@@ -31,7 +33,7 @@ namespace GEIN.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<datamodel.Categoria>> GetCategoria(int id)
         {
-            var aux = new BL.Categoria(_geinContext).GetOneById(id);
+            var aux = new bl.Categoria(_geinContext).GetOneById(id);
             return _mapper.Map<data.Categoria, datamodel.Categoria>(aux);
         }
 
@@ -44,7 +46,7 @@ namespace GEIN.API.Controllers
                 return BadRequest();
             }
             var mapaux = _mapper.Map<datamodel.Categoria, data.Categoria>(model);
-            new BL.Categoria(_geinContext).Update(mapaux);
+            new bl.Categoria(_geinContext).Update(mapaux);
             return NoContent();
         }
 
@@ -53,7 +55,7 @@ namespace GEIN.API.Controllers
         public async Task<IActionResult> PostCategoria(datamodel.Categoria model)
         {
             var mapaux = _mapper.Map<datamodel.Categoria, data.Categoria>(model);
-            new BL.Categoria(_geinContext).Insert(mapaux);
+            new bl.Categoria(_geinContext).Insert(mapaux);
             return NoContent();
         }
 
@@ -61,12 +63,12 @@ namespace GEIN.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<datamodel.Categoria>> DeleteCategoria(int id)
         {
-            var categoria = new BL.Categoria(_geinContext).GetOneById(id);
+            var categoria = new bl.Categoria(_geinContext).GetOneById(id);
             if (categoria == null)
             {
                 return NotFound();
             }
-            new BL.Categoria(_geinContext).Delete(categoria);
+            new bl.Categoria(_geinContext).Delete(categoria);
             var aux = _mapper.Map<data.Categoria, datamodel.Categoria>(categoria);
             return aux;
         }

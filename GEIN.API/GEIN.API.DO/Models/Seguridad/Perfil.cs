@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GEIN.API.DO.Models
+namespace GEIN.API.DO.Models.Seguridad
 {
-    public class Categoria
+    public class Perfil
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdCategoria { get; set; }
+        public int IdPerfil { get; set; }
         public string Descripcion { get; set; }
     }
 }
